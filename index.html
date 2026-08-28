@@ -82,7 +82,7 @@
         const MI_CELULAR = "51954525895"; 
 
         function pedir(nombre, precio) {
-            const texto = encodeURIComponent(`¡Hola Yoss Collection! Me interesa adquirir esta pieza:\n\n✨ *${nombre}*\n💰 Precio: S/ ${precio.toFixed(2)}\n\n¿Está disponible?`);
+            const texto = encodeURIComponent(`¡Hola Yoss Collection! Me interesa adquirir esta pieza:\n\n✨ *${nombre}*\n💰 Precio: S/ ${precio.toFixed(2)}\n\n¿Está disponible?`;
             window.location.href = `https://wa.me{MI_CELULAR}?text=${texto}`;
         }
     </script>
