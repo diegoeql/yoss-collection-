@@ -35,7 +35,7 @@
         // Función que lee el archivo joyas.json que creaste en el paso anterior
         async function cargarJoyas() {
             try {
-                const respuesta = await fetch('/Yoss-Collection/joyas.json');
+                const respuesta = await fetch('/yoss-Collection-/joyas.json');
                 const joyas = await respuesta.json();
                 const contenedor = document.getElementById('contenedor-joyas');
                 contenedor.innerHTML = ''; // Limpiamos el texto de carga
