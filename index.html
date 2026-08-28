@@ -4,75 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yoss Collection - Joyería</title>
-    <!-- Cargamos Tailwind CSS para un diseño moderno y rápido sin sufrir con CSS puro -->
-    <script src="https://tailwindcss.com"></script>
+    <style>
+        /* Estilos directos incorporados para evitar depender de enlaces externos caídos */
+        body { font-family: Arial, sans-serif; background-color: #f9fafb; margin: 0; padding: 0; color: #333; }
+        header { background-color: #ffffff; padding: 20px; text-align: center; border-bottom: 2px solid #b45309; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        header h1 { margin: 0; color: #b45309; font-size: 28px; letter-spacing: 2px; }
+        header p { margin: 5px 0 0 0; color: #6b7280; font-size: 14px; }
+        main { max-width: 1000px; mx-auto; padding: 30px 20px; margin: auto; }
+        .subtitulo { text-align: center; color: #6b7280; margin-bottom: 30px; font-size: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 8px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .card-body { padding: 20px; }
+        .material { color: #d97706; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .nombre { font-size: 18px; margin: 10px 0 5px 0; color: #111827; }
+        .desc { color: #6b7280; font-size: 14px; line-height: 1.4; height: 40px; margin-bottom: 15px; }
+        .footer-card { display: flex; justify-content: space-between; align-items: center; pt-15px; border-top: 1px solid #f3f4f6; }
+        .precio { font-size: 20px; font-weight: bold; color: #111827; }
+        .btn { background-color: #059669; color: white; border: none; padding: 10px 15px; rounded-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 13px; border-radius: 4px; }
+        .btn:hover { background-color: #047857; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body>
 
-    <!-- Encabezado / Navbar -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-wide text-amber-700">YOSS COLLECTION</h1>
-            <span class="text-sm bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-medium">Catálogo Digital</span>
-        </div>
+    <header>
+        <h1>YOSS COLLECTION</h1>
+        <p>Catálogo Digital de Joyería</p>
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        <p class="text-center text-gray-500 mb-8">Elige tus joyas favoritas y envíanos tu pedido directo por WhatsApp sin registros.</p>
+    <main>
+        <p class="subtitulo">Elige tus joyas favoritas y envíanos tu pedido directo por WhatsApp sin registros de forma inmediata.</p>
         
-        <!-- Aquí se cargarán las joyas automáticamente con JavaScript -->
-        <div id="contenedor-joyas" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <p class="text-center col-span-full text-gray-400">Cargando colección brillante...</p>
+        <div class="grid">
+            <!-- Joya 1 -->
+            <div class="card">
+                <div class="card-body">
+                    <span class="material">Plata 925</span>
+                    <h3 class="nombre">Anillo de Plata Tradicional</h3>
+                    <p class="desc">Anillo pulido de plata ley 925 de alta calidad.</p>
+                    <div class="footer-card">
+                        <span class="precio">S/ 45.00</span>
+                        <button onclick="pedir('Anillo de Plata Tradicional', 45)" class="btn">Pedir por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Joya 2 -->
+            <div class="card">
+                <div class="card-body">
+                    <span class="material">Oro 18K</span>
+                    <h3 class="nombre">Cadena de Oro Elegante</h3>
+                    <p class="desc">Cadena fina ideal para uso diario o compromisos especiales.</p>
+                    <div class="footer-card">
+                        <span class="precio">S/ 120.00</span>
+                        <button onclick="pedir('Cadena de Oro Elegante', 120)" class="btn">Pedir por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Joya 3 -->
+            <div class="card">
+                <div class="card-body">
+                    <span class="material">Artesanal</span>
+                    <h3 class="nombre">Pulsera Huayruro Especial</h3>
+                    <p class="desc">Hecha a mano con auténticas semillas de huayruro para la buena suerte.</p>
+                    <div class="footer-card">
+                        <span class="precio">S/ 35.00</span>
+                        <button onclick="pedir('Pulsera Huayruro Especial', 35)" class="btn">Pedir por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!-- Lógica de programación en JavaScript -->
     <script>
-        // CONFIGURACIÓN: Pon aquí tu número de WhatsApp real con el código de tu país (ej: 51 para Perú)
-        const NUMERO_WHATSAPP = "51954525895"; 
+        // CONFIGURACIÓN: Reemplaza este número por tu WhatsApp real (ejemplo para Perú: 51 seguido de tus 9 dígitos)
+        const MI_CELULAR = "51954525895"; 
 
-        // Función que lee el archivo joyas.json que creaste en el paso anterior
-        async function cargarJoyas() {
-            try {
-                const respuesta = await fetch('/yoss-Collection-/joyas.json');
-                const joyas = await respuesta.json();
-                const contenedor = document.getElementById('contenedor-joyas');
-                contenedor.innerHTML = ''; // Limpiamos el texto de carga
-
-                joyas.forEach(joya => {
-                    // Creamos la tarjeta visual para cada joya
-                    const tarjeta = document.createElement('div');
-                    tarjeta.className = "bg-white rounded-lg shadow overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow";
-                    tarjeta.innerHTML = `
-                        <img src="${joya.imagen}" alt="${joya.nombre}" class="w-full h-64 object-cover">
-                        <div class="p-4">
-                            <span class="text-xs font-semibold text-amber-600 uppercase tracking-wider">${joya.material}</span>
-                            <h3 class="text-lg font-bold text-gray-900 mt-1">${joya.nombre}</h3>
-                            <p class="text-gray-500 text-sm mt-1 h-12 overflow-hidden">${joya.descripcion}</p>
-                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-50">
-                                <span class="text-xl font-extrabold text-gray-900">S/ ${joya.precio.toFixed(2)}</span>
-                                <button onclick="enviarWhatsApp('${joya.nombre}', ${joya.precio})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition-colors text-sm flex items-center gap-1">
-                                    Pedir por WhatsApp
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    contenedor.appendChild(tarjeta);
-                });
-            } catch (error) {
-                console.error("Error cargando las joyas:", error);
-            }
+        function pedir(nombre, precio) {
+            const texto = encodeURIComponent(¡Hola Yoss Collection! Me interesa adquirir esta pieza:\n\n✨ *${nombre}*\n💰 Precio: S/ ${precio.toFixed(2)}\n\n¿Está disponible?);
+            window.open(https://wa.me{MI_CELULAR}?text=${texto}, '_blank');
         }
-
-        // Función que arma el mensaje y redirige al cliente a tu WhatsApp sin instalar nada
-        function enviarWhatsApp(nombreJoya, precioJoya) {
-            const mensaje = encodeURIComponent(¡Hola Yoss Collection! Me interesa adquirir la siguiente pieza:\n\n✨ *${nombreJoya}*\n💰 Precio: S/ ${precioJoya.toFixed(2)}\n\n¿Está disponible?);
-            window.open(https://wa.me{NUMERO_WHATSAPP}?text=${mensaje}, '_blank');
-        }
-
-        // Ejecutamos la función al cargar la página
-        cargarJoyas();
     </script>
 </body>
 </html>
