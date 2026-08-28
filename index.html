@@ -78,12 +78,13 @@
     </main>
 
     <script>
-        // CONFIGURACIÓN: Reemplaza este número por tu WhatsApp real (ejemplo para Perú: 51 seguido de tus 9 dígitos)
+        // 1. CONFIGURACIÓN: Pon aquí tu número real de WhatsApp (ej: 51 seguido de tus 9 dígitos)
         const MI_CELULAR = "51954525895"; 
 
+        // 2. FUNCIÓN: Se ejecuta al presionar el botón verde
         function pedir(nombre, precio) {
-            const texto = encodeURIComponent(`¡Hola Yoss Collection! Me interesa adquirir esta pieza:\n\n✨ *${nombre}*\n💰 Precio: S/ ${precio.toFixed(2)}\n\n¿Está disponible?`;
-            window.location.href = `https://wa.me{MI_CELULAR}?text=${texto}`;
+            const texto = encodeURIComponent('¡Hola Yoss Collection! Me interesa adquirir esta pieza: ' + nombre + '. Precio: S/ ' + precio.toFixed(2));
+            window.location.href = 'https://wa.me' + MI_CELULAR + '?text=' + texto;
         }
     </script>
 </body>
