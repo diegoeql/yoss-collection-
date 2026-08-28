@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Anillo de Plata Tradicional",
+    "precio": 45.00,
+    "categoria": "Anillos",
+    "material": "Plata 925",
+    "descripcion": "Anillo pulido de plata ley 925 de alta calidad.",
+    "imagen": "https://unsplash.com"
+  },
+  {
+    "id": 2,
+    "nombre": "Cadena de Oro Elegante",
+    "precio": 120.00,
+    "categoria": "Cadenas",
+    "material": "Oro 18K",
+    "descripcion": "Cadena fina ideal para uso diario o compromisos.",
+    "imagen": "https://unsplash.com"
+  },
+  {
+    "id": 3,
+    "nombre": "Pulsera Huayruro Artesanal",
+    "precio": 35.00,
+    "categoria": "Pulseras",
+    "material": "Semillas de Huayruro y Plata",
+    "descripcion": "Pulsera hecha a mano con auténticas semillas de huayruro para la buena suerte.",
+    "imagen": "https://unsplash.com"
+  }
+]
