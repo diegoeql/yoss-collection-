@@ -79,12 +79,12 @@
 
     <script>
         // 1. CONFIGURACIÓN: Pon aquí tu número real de WhatsApp (ej: 51 seguido de tus 9 dígitos)
-        const MI_CELULAR = "51953072597"; 
+        const MI_CELULAR = "51954525895"; 
 
         // 2. FUNCIÓN: Se ejecuta al presionar el botón verde
         function pedir(nombre, precio) {
             const texto = encodeURIComponent('¡Hola Yoss Collection! Me interesa adquirir esta pieza: ' + nombre + '. Precio: S/ ' + precio.toFixed(2));
-            window.location.href = 'https://wa.me' + MI_CELULAR + '?text=' + texto;
+            window.location.href = 'https://wa.me/' + MI_CELULAR + '?text=' + texto;
         }
     </script>
 </body>
