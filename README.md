@@ -1,2 +1,2 @@
-# yoss-collection-
+# yoss collection
 Catalogo digital de Yoss Collection 
