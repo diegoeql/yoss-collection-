@@ -1,29 +1,83 @@
-[
-  {
-    "id": 1,
-    "nombre": "Anillo de Plata Tradicional",
-    "precio": 45.00,
-    "categoria": "Anillos",
-    "material": "Plata 925",
-    "descripcion": "Anillo pulido de plata ley 925 de alta calidad.",
-    "imagen": "https://unsplash.com"
-  },
-  {
-    "id": 2,
-    "nombre": "Cadena de Oro Elegante",
-    "precio": 120.00,
-    "categoria": "Cadenas",
-    "material": "Oro 18K",
-    "descripcion": "Cadena fina ideal para uso diario o compromisos.",
-    "imagen": "https://unsplash.com"
-  },
-  {
-    "id": 3,
-    "nombre": "Pulsera Huayruro Artesanal",
-    "precio": 35.00,
-    "categoria": "Pulseras",
-    "material": "Semillas de Huayruro y Plata",
-    "descripcion": "Pulsera hecha a mano con auténticas semillas de huayruro para la buena suerte.",
-    "imagen": "https://unsplash.com"
+<!-- Contenedor principal de la tienda -->
+<main class="catalogo-container">
+  <h2 class="titulo-seccion">Nuestra Colección</h2>
+  
+  <!-- Botones de Filtro por Público -->
+  <div class="filtros-genero">
+    <button class="btn-filtro activo" onclick="filtrarCatalogo('todos', this)">Todos</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('varones', this)">Varones</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('mujeres', this)">Mujeres</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('niños', this)">Niños</button>
+  </div>
+
+  <!-- Contenedor donde se pintan las joyas -->
+  <div id="contenedor-joyas" class="grid-productos"></div>
+</main>
+
+<script>
+  // Variable global para almacenar los productos cargados
+  let todasLasJoyas = [];
+
+  async function cargarCatalogo() {
+    try {
+      const respuesta = await fetch('joyas.json');
+      todasLasJoyas = await respuesta.json();
+      
+      // Al cargar la página por primera vez, muestra todo
+      mostrarProductos(todasLasJoyas);
+    } catch (error) {
+      console.error('Error al cargar el catálogo de joyas:', error);
+    }
   }
-]
+
+  // Función encargada de pintar las tarjetas en el HTML
+  function mostrarProductos(listaProductos) {
+    const contenedor = document.getElementById('contenedor-joyas');
+    contenedor.innerHTML = ''; 
+
+    if(listaProductos.length === 0) {
+      contenedor.innerHTML = <p class="sin-productos">No hay piezas disponibles en esta categoría por ahora.</p>;
+      return;
+    }
+    
+    listaProductos.forEach(joya => {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'tarjeta-joya';
+      
+      tarjeta.innerHTML = `
+        <div class="imagen-wrapper">
+          <img src="${joya.imagen}" alt="${joya.nombre}" class="joya-foto">
+        </div>
+        <div class="joya-info">
+          <span class="joya-categoria">${joya.categoria} | ${joya.genero}</span>
+          <h3 class="joya-nombre">${joya.nombre}</h3>
+          <p class="joya-material">✨ ${joya.material}</p>
+          <p class="joya-descripcion">${joya.descripcion}</p>
+          <div class="joya-footer">
+            <span class="joya-precio">$${joya.precio.toFixed(2)}</span>
+            <button class="btn-ver" onclick="alert('¡Pronto podrás comprar el ${joya.nombre}!')">Ver Pieza</button>
+          </div>
+        </div>
+      `;
+      contenedor.appendChild(tarjeta);
+    });
+  }
+
+  // Función que filtra las joyas según el botón presionado
+  function filtrarCatalogo(generoSeleccionado, botonPresionado) {
+    // 1. Cambiar la clase activa visual en los botones
+    document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
+    botonPresionado.classList.add('activo');
+
+    // 2. Filtrar la lista de joyas
+    if (generoSeleccionado === 'todos') {
+      mostrarProductos(todasLasJoyas);
+    } else {
+      const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
+      mostrarProductos(joyasFiltradas);
+    }
+  }
+
+  // Arrancar la app al cargar el documento
+  document.addEventListener('DOMContentLoaded', cargarCatalogo);
+</script>
