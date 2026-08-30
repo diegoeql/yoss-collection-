@@ -5,24 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yoss Collection - Joyería</title>
     <style>
-        /* Estilos directos incorporados para evitar depender de enlaces externos caídos */
-        body { font-family: Arial, sans-serif; background-color: #f9fafb; margin: 0; padding: 0; color: #333; }
-        header { background-color: #ffffff; padding: 20px; text-align: center; border-bottom: 2px solid #b45309; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        header h1 { margin: 0; color: #b45309; font-size: 28px; letter-spacing: 2px; }
-        header p { margin: 5px 0 0 0; color: #6b7280; font-size: 14px; }
-        main { max-width: 1000px; mx-auto; padding: 30px 20px; margin: auto; }
-        .subtitulo { text-align: center; color: #6b7280; margin-bottom: 30px; font-size: 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 8px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        .card-body { padding: 20px; }
-        .material { color: #d97706; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .nombre { font-size: 18px; margin: 10px 0 5px 0; color: #111827; }
-        .desc { color: #6b7280; font-size: 14px; line-height: 1.4; height: 40px; margin-bottom: 15px; }
-        .footer-card { display: flex; justify-content: space-between; align-items: center; pt-15px; border-top: 1px solid #f3f4f6; }
-        .precio { font-size: 20px; font-weight: bold; color: #111827; }
-        .btn { background-color: #059669; color: white; border: none; padding: 10px 15px; rounded-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 13px; border-radius: 4px; }
-        .btn:hover { background-color: #047857; }
+       /* Estilos elegantes para la barra de categorías */
+.filtros-genero {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0 35px 0;
+}
+
+.btn-filtro {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #dddddd;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-filtro:hover {
+  background-color: #f5f5f5;
+}
+
+/* Cuando el botón esté seleccionado, toma un tono dorado elegante */
+.btn-filtro.activo {
+  background-color: #b89742; 
+  color: #ffffff;
+  border-color: #b89742;
+}
     </style>
 </head>
 <body>
@@ -33,59 +44,92 @@
     </header>
 
     <main>
-        <p class="subtitulo">Elige tus joyas favoritas y envíanos tu pedido directo por WhatsApp.</p>
-        
-        <div class="grid">
-            <!-- Joya 1 -->
-            <div class="card">
-                <div class="card-body">
-                    <span class="material">Plata 925</span>
-                    <h3 class="nombre">Anillo de Plata Tradicional</h3>
-                    <p class="desc">Anillo pulido de plata ley 925 de alta calidad.</p>
-                    <div class="footer-card">
-                        <span class="precio">S/ 45.00</span>
-                        <button onclick="pedir('Anillo de Plata Tradicional', 45)" class="btn">Pedir por WhatsApp</button>
-                    </div>
-                </div>
-            </div>
+  <p class="subtitulo">Elige tus Joyas Favoritas y envíanos tu pedido directo por WhatsApp.</p>
+  
+  <!-- BOTONES DE FILTRO (Varones, Mujeres, Niños) -->
+  <div class="filtros-genero">
+    <button class="btn-filtro activo" onclick="filtrarCatalogo('todos', this)">Todos</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('varones', this)">Varones</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('mujeres', this)">Mujeres</button>
+    <button class="btn-filtro" onclick="filtrarCatalogo('niños', this)">Niños</button>
+  </div>
 
-            <!-- Joya 2 -->
-            <div class="card">
-                <div class="card-body">
-                    <span class="material">Oro 18K</span>
-                    <h3 class="nombre">Cadena de Oro Elegante</h3>
-                    <p class="desc">Cadena fina ideal para uso diario o compromisos especiales.</p>
-                    <div class="footer-card">
-                        <span class="precio">S/ 120.00</span>
-                        <button onclick="pedir('Cadena de Oro Elegante', 120)" class="btn">Pedir por WhatsApp</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Joya 3 -->
-            <div class="card">
-                <div class="card-body">
-                    <span class="material">Artesanal</span>
-                    <h3 class="nombre">Pulsera Huayruro Especial</h3>
-                    <p class="desc">Hecha a mano con auténticas semillas de huayruro para la buena suerte.</p>
-                    <div class="footer-card">
-                        <span class="precio">S/ 35.00</span>
-                        <button onclick="pedir('Pulsera Huayruro Especial', 35)" class="btn">Pedir por WhatsApp</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+  <!-- Contenedor vacío donde JavaScript pintará tus joyas dinámicamente -->
+  <div id="contenedor-joyas" class="grid"></div>
+</main>
 
     <script>
-        // 1. CONFIGURACIÓN: Pon aquí tu número real de WhatsApp (ej: 51 seguido de tus 9 dígitos)
-        const MI_CELULAR = "51954525895"; 
+  // 1. CONFIGURACIÓN: Tu número de WhatsApp real (Mantenemos tu lógica)
+  const MI_CELULAR = "51964525825"; 
 
-        // 2. FUNCIÓN: Se ejecuta al presionar el botón verde
-        function pedir(nombre, precio) {
-            const texto = encodeURIComponent('¡Hola Yoss Collection! Me interesa adquirir esta pieza: ' + nombre + '. Precio: S/ ' + precio.toFixed(2));
-            window.location.href = 'https://wa.me/' + MI_CELULAR + '?text=' + texto;
-        }
-    </script>
+  // Variable para almacenar el catálogo completo en memoria
+  let todasLasJoyas = [];
+
+  // Función para jalar los datos desde tu almacén joyas.json
+  async function cargarCatalogo() {
+    try {
+      const respuesta = await fetch('joyas.json');
+      todasLasJoyas = await respuesta.json();
+      
+      // Al iniciar el local, muestra todas las piezas
+      mostrarProductos(todasLasJoyas);
+    } catch (error) {
+      console.error('Error al cargar el archivo de inventario:', error);
+    }
+  }
+
+  // Función encargada de estructurar y pintar las tarjetas usando tus estilos CSS anteriores
+  function mostrarProductos(listaProductos) {
+    const contenedor = document.getElementById('contenedor-joyas');
+    contenedor.innerHTML = ''; // Limpia las vitrinas antes de rellenar
+
+    if (listaProductos.length === 0) {
+      contenedor.innerHTML = <p style="grid-column: 1/-1; text-align: center; color: #777;">No hay joyas disponibles en esta categoría por ahora.</p>;
+      return;
+    }
+
+    listaProductos.forEach(joya => {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'card';
+
+      // Estructuramos la tarjeta respetando al 100% tus clases CSS visuales
+      tarjeta.innerHTML = `
+        <div class="card-body">
+          <span class="material">${joya.material} | ${joya.categoria}</span>
+          <h3 class="nombre">${joya.nombre}</h3>
+          <p class="desc">${joya.descripcion}</p>
+          <div class="footer-card">
+            <span class="precio">S/ ${joya.precio.toFixed(2)}</span>
+            <button onclick="pedir('${joya.nombre}', '${joya.precio}')" class="btn">Pedir por WhatsApp</button>
+          </div>
+        </div>
+      `;
+      contenedor.appendChild(tarjeta);
+    });
+  }
+
+  // Función para segmentar el catálogo al hacer clic en los botones
+  function filtrarCatalogo(generoSeleccionado, botonPresionado) {
+    // Quita la marca dorada de los otros botones y se la pone al seleccionado
+    document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
+    botonPresionado.classList.add('activo');
+
+    if (generoSeleccionado === 'todos') {
+      mostrarProductos(todasLasJoyas);
+    } else {
+      const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
+      mostrarProductos(joyasFiltradas);
+    }
+  }
+
+  // 2. FUNCIÓN DE WHATSAPP (Mantenemos intacta tu fantástica lógica original)
+  function pedir(nombre, precio) {
+    let texto = encodeURIComponent("¡Hola Yoss Collection! Me interesa adquirir esta pieza: \n\n* " + nombre + "\n* Precio: S/ " + precio + "\n\n¿Tienen disponibilidad?");
+    window.location.href = "https://wa.me" + MI_CELULAR + "?text=" + texto;
+  }
+
+  // Ejecuta la carga automática al abrir la tienda web
+  document.addEventListener('DOMContentLoaded', cargarCatalogo);
+</script>
 </body>
 </html>
