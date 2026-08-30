@@ -69,19 +69,19 @@
       border-bottom: 2px solid #111111;
     }
 
-  .banner-hero {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4)), 
-                    url('portada.jpg.jpeg') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  padding: 100px 8% !important;
-  display: flex !important;
-  align-items: center !important;
-  min-height: 300px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
+    .banner-hero {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4)), 
+                        url('portada.jpg.jpeg') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      padding: 100px 8% !important;
+      display: flex !important;
+      align-items: center !important;
+      min-height: 300px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
 
     .manuscrito {
       font-family: 'Playfair Display', serif;
@@ -252,7 +252,7 @@
     <div class="banner-contenido">
       <span class="manuscrito">Un Viaje a la Majestuosidad</span>
       <h1 class="titulo-banner">Yoss Collection</h1>
-      <p class="banner-desc">Descubre los últimos diseños excluisivos y tendencias en joyería que tenemos para ti, pensados para realzar tu estilo en cada ocasión. Encuentra la pieza perfecta y haz de cada momento una declaración de sofisticación.</p>
+      <p class="banner-desc">Descubre los últimos diseños exclusivos y tendencias en joyería que tenemos para ti, pensados para realzar tu estilo en cada ocasión. Encuentra la pieza perfecta y haz de cada momento una declaración de sofisticación.</p>
     </div>
   </section>
 
@@ -260,7 +260,7 @@
   <main class="contenedor-catalogo">
     <div class="seccion-intro">
       <h2>DALE UN TOQUE DE BRILLO A TU DIA</h2>
-      <p>Conoce las tendencias en joyería de esta temporada. Tenemos opciones para todos los gustos, desde lo clasico hasta lo mas moderno. Anímate a brillar hoy.</p>
+      <p>Conoce las tendencias en joyería de esta temporada. Tenemos opciones para todos los gustos, desde lo clásico hasta lo más moderno. Anímate a brillar hoy.</p>
     </div>
 
     <!-- Espacio Dinámico para las Joyas -->
@@ -290,7 +290,7 @@
       contenedor.innerHTML = '';
 
       if (listaProductos.length === 0) {
-        contenedor.innerHTML = <p style="grid-column:1/-1; text-align:center; color:#999; font-size:0.9rem; font-family:sans-serif; padding:40px 0;">Próximamente añadiremos más piezas exclusivas a esta colección.</p>;
+        contenedor.innerHTML = <p style="grid-column:1/-1; text-align:center; color:#999; font-size:0.9rem; padding:40px 0;">Próximamente añadiremos más piezas exclusivas a esta colección.</p>;
         return;
       }
 
@@ -298,42 +298,44 @@
         const tarjeta = document.createElement('div');
         tarjeta.className = 'card-premium';
 
+        // Mensaje personalizado para WhatsApp
+        const mensajeWa = encodeURIComponent(¡Hola Yoss Collection! Me interesa el producto: ${joya.nombre} de la sección ${joya.seccion}.);
+        const enlaceWhatsapp = https://wa.me{MI_CELULAR}?text=${mensajeWa};
+
         tarjeta.innerHTML = `
           <div class="img-container">
             <img src="${joya.imagen}" alt="${joya.nombre}" class="img-joya">
           </div>
           <div class="info-premium">
-            <span class="material-premium">${joya.material}</span>
+            <span class="material-premium">${joya.material || 'Joyería Fina'}</span>
             <h3 class="nombre-premium">${joya.nombre}</h3>
-            <p class="desc-premium">${joya.descripcion}</p>
+            <p class="desc-premium">${joya.descripcion || ''}</p>
             <span class="precio-premium">S/ ${joya.precio.toFixed(2)}</span>
-            <button onclick="pedir('${joya.nombre}', '${joya.precio}')" class="btn-whatsapp">Pedir por WhatsApp</button>
+            <a href="${enlaceWhatsapp}" target="_blank" style="text-decoration: none;">
+              <button class="btn-whatsapp">Comprar por WhatsApp</button>
+            </a>
           </div>
         `;
         contenedor.appendChild(tarjeta);
       });
     }
 
-    // Controlar filtros del menú superior
-    function filtrarCatalogo(generoSeleccionado, botonPresionado) {
-      document.querySelectorAll('.btn-nav').forEach(btn => btn.classList.remove('activo'));
-      if (botonPresionado) botonPresionado.classList.add('activo');
+    // Filtrar los productos por sección
+    function filtrarCatalogo(seccion, botonSeleccionado) {
+      const botones = document.querySelectorAll('.nav-categorias .btn-nav');
+      botones.forEach(btn => btn.classList.remove('activo'));
+      
+      botonSeleccionado.classList.add('activo');
 
-      if (generoSeleccionado === 'todos') {
+      if (seccion === 'todos') {
         mostrarProductos(todasLasJoyas);
       } else {
-        const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
-        mostrarProductos(joyasFiltradas);
+        const productosFiltrados = todasLasJoyas.filter(joya => joya.seccion === seccion);
+        mostrarProductos(productosFiltrados);
       }
     }
 
-    // Redirección profesional a WhatsApp
-    function pedir(nombre, precio) {
-      let texto = encodeURIComponent("¡Hola Yoss Collection! Me interesa adquirir esta hermosa pieza de joyería:\n\n✨ Producto: " + nombre + "\n💰 Precio: S/ " + precio + "\n\n¿Me podrían confirmar si tienen disponibilidad para entrega?");
-      window.location.href = "https://wa.me" + MI_CELULAR + "?text=" + texto;
-    }
-
-    // Inicializar tienda
+    // Iniciar la carga apenas abra la página
     document.addEventListener('DOMContentLoaded', cargarCatalogo);
   </script>
 </body>
