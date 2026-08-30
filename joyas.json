@@ -1,83 +1,346 @@
-<!-- Contenedor principal de la tienda -->
-<main class="catalogo-container">
-  <h2 class="titulo-seccion">Nuestra Colección</h2>
-  
-  <!-- Botones de Filtro por Público -->
-  <div class="filtros-genero">
-    <button class="btn-filtro activo" onclick="filtrarCatalogo('todos', this)">Todos</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('varones', this)">Varones</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('mujeres', this)">Mujeres</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('niños', this)">Niños</button>
-  </div>
-
-  <!-- Contenedor donde se pintan las joyas -->
-  <div id="contenedor-joyas" class="grid-productos"></div>
-</main>
-
-<script>
-  // Variable global para almacenar los productos cargados
-  let todasLasJoyas = [];
-
-  async function cargarCatalogo() {
-    try {
-      const respuesta = await fetch('joyas.json');
-      todasLasJoyas = await respuesta.json();
-      
-      // Al cargar la página por primera vez, muestra todo
-      mostrarProductos(todasLasJoyas);
-    } catch (error) {
-      console.error('Error al cargar el catálogo de joyas:', error);
-    }
+[
+  {
+    "nombre": "Colección de Pendientes de Plata (1)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Diseño exclusivo y delicado ideal para obsequios especiales, eventos familiares y looks primaverales.",
+    "imagen": "foto_1.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (2)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Conjunto con acabados sutiles que resalta la pureza del metal. Perfecto para el uso diario de las más pequeñas.",
+    "imagen": "foto_2.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (3)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Set con motivos infantiles tradicionales, combinando comodidad y un brillo seguro para pieles delicadas.",
+    "imagen": "foto_3.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (4)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Variedad de figuras clásicas que añaden un toque de armonía y frescura al estilo infantil.",
+    "imagen": "foto_4.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (5)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Pendientes simétricos de peso ligero con un sistema de sujeción sumamente confortable.",
+    "imagen": "foto_5.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (6)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Estilo juvenil y contemporáneo ideal para combinar con prendas de temporada casual.",
+    "imagen": "foto_6.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (7)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Detalles finamente pulidos con simetrías perfectas que aseguran una proyección de brillo constante.",
+    "imagen": "foto_7.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (8)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Estructura ergonómica y acabados sutiles diseñados para realzar la belleza natural.",
+    "imagen": "foto_8.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (9)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Joyas versátiles con siluetas nítidas, ideales para coleccionar o usar en celebraciones.",
+    "imagen": "foto_9.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (10)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Acabado espejo de alta calidad que ofrece una gran resistencia al desgaste cotidiano.",
+    "imagen": "foto_10.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (11)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Pequeños destellos de elegancia creados bajo estrictos estándares de joyería fina.",
+    "imagen": "foto_11.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (12)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Siluetas puras y pulidas que se adaptan con gracia a cualquier ocasión especial.",
+    "imagen": "foto_12.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (13)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Pendientes atemporales con líneas suaves que garantizan máxima comodidad y distinción.",
+    "imagen": "foto_13.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (14)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Una opción clásica que equilibra simplicidad y sofisticación para las más pequeñas.",
+    "imagen": "foto_14.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (15)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Variedad de texturas pulidas que capturan sutilmente los reflejos de la luz ambiente.",
+    "imagen": "foto_15.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (16)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "La pureza del metal precioso moldeada en accesorios versátiles y ligeros.",
+    "imagen": "foto_16.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (17)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Expresión de arte minimalista en formato miniatura, perfecto para uso continuo.",
+    "imagen": "foto_17.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (18)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Piezas sólidas con cierres de seguridad optimizados para total tranquilidad.",
+    "imagen": "foto_18.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (19)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Estética limpia y pulido profesional que resalta de forma discreta y distinguida.",
+    "imagen": "foto_19.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (20)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Set sofisticado diseñado para complementar vestimentas tanto formales como casuales.",
+    "imagen": "foto_20.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (21)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Alternativas elegantes pensadas para quienes buscan un detalle único de alta joyería.",
+    "imagen": "foto_21.jpg"
+  },
+  {
+    "nombre": "Colección de Pendientes de Plata (22)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Modelos selectos que fusionan tradición metalúrgica con tendencias contemporáneas.",
+    "imagen": "foto_22.jpg"
+  },
+  {
+    "nombre": "Anillos de Varón con Gemas Ovaladas (23)",
+    "categoria": "Anillos",
+    "genero": "varones",
+    "material": "Plata 950",
+    "descripcion": "Colección de anillos para caballero con imponentes incrustaciones centrales de gemas talladas en tonos verde, violeta y negro.",
+    "imagen": "foto_23.jpg"
+  },
+  {
+    "nombre": "Anillos de Varón Sello Ejecutivo (24)",
+    "categoria": "Anillos",
+    "genero": "varones",
+    "material": "Plata 950",
+    "descripcion": "Set de tres anillos estilo sello con piedras engastadas en superficies lisas y grabados laterales geométricos.",
+    "imagen": "foto_24.jpg"
+  },
+  {
+    "nombre": "Anillos de Varón con Diseños Tallados (25)",
+    "categoria": "Anillos",
+    "genero": "varones",
+    "material": "Plata 925",
+    "descripcion": "Modelos exclusivos trabajados con relieves detallados, incluyendo texturas de red, emblemas circulares y gemas cuadradas.",
+    "imagen": "foto_25.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Tradicional (26)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Conjunto de eslabones pulidos con diseño distintivo que refleja sobriedad, equilibrio y alta durabilidad técnica.",
+    "imagen": "foto_26.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Eslabón Alterno (27)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Eslabones entrelazados con precisión simétrica y un acabado brillante de alta gama, ideal para eventos de gala.",
+    "imagen": "foto_27.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Eslabón Doble (28)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Conjunto de eslabones reforzados de arquitectura robusta, ideal para imponer presencia y estilo.",
+    "imagen": "foto_28.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Estilo Cordón (29)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Diseño entrelazado de textura densa que ofrece un relieve imponente y caída perfecta sobre el pecho.",
+    "imagen": "foto_29.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Eslabón Alargado (30)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Cadena elegante de líneas estilizadas y eslabones calados, pensada para la comodidad diaria masculina.",
+    "imagen": "foto_30.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Eslabón Clásico (31)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Diseño simétrico tradicional trabajado con cierres de seguridad de alta durabilidad y pulido espejo.",
+    "imagen": "foto_31.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Brillo Premium (32)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Eslabones facetados que maximizan la refracción de la luz natural con cada movimiento corporal.",
+    "imagen": "foto_32.jpg"
+  },
+  {
+    "nombre": "Cadena de Plata Eslabón Torcido (33)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Estructura trenzada helicoidal que aporta una textura y volumen de alta costura al porte del caballero.",
+    "imagen": "foto_33.jpg"
+  },
+  {
+    "nombre": "Cadena Doble Eslabón Cordón (34)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Cadena de doble hilera compactada que genera una caída uniforme de gran sobriedad y distinción.",
+    "imagen": "foto_34.jpg"
+  },
+  {
+    "nombre": "Cadena Eslabón Tradicional (35)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Eslabones redondos uniformes con uniones reforzadas, un básico elemental resistente al uso diario continuo.",
+    "imagen": "foto_35.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Cadena Grumet Delgada (36)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Eslabones aplanados cortados con diamante para un perfil delgado, liso y altamente confortable.",
+    "imagen": "foto_36.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Cadena Eslabón Alargado (37)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Estilo moderno de eslabones rectangulares alargados, óptimo para lucir de forma individual o con dijes pesados.",
+    "imagen": "foto_37.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Cadena de Eslabones Clásica (38)",
+    "categoria": "Cadenas",
+    "genero": "varones",
+    "material": "Plata Fina",
+    "descripcion": "Cadena clásica pulida por fricción para un brillo duradero que destaca con cualquier vestimenta.",
+    "imagen": "foto_38.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Set de Pendientes Infantiles Variados (39)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Set exclusivo de ocho pares para niñas con diseños geométricos, florales y de fauna que evocan inocencia y alegría.",
+    "imagen": "foto_39.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Set de Pendientes Creativos para Niña (40)",
+    "categoria": "Aretes",
+    "genero": "niños",
+    "material": "Plata Fina",
+    "descripcion": "Conjunto de seis pares con formas icónicas: mariposas, elefantes y flores, diseñados meticulosamente con bordes suaves.",
+    "imagen": "foto_40.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Collar Fino con Dije de Corazón (41)",
+    "categoria": "Collares",
+    "genero": "mujeres",
+    "material": "Plata Fina",
+    "descripcion": "Cadena sutil acompañada por dos corazones simétricos y un colgante central que simboliza amor y unión.",
+    "imagen": "foto_41.jpg",
+    "destacado": true
+  },
+  {
+    "nombre": "Collar Elegancia Atemporal (42)",
+    "categoria": "Collares",
+    "genero": "mujeres",
+    "material": "Plata Fina",
+    "descripcion": "Cadena de eslabón refinado que resalta las líneas del cuello. Una pieza clave para obsequios memorables.",
+    "imagen": "foto_42.jpg",
+    "destacado": true
   }
-
-  // Función encargada de pintar las tarjetas en el HTML
-  function mostrarProductos(listaProductos) {
-    const contenedor = document.getElementById('contenedor-joyas');
-    contenedor.innerHTML = ''; 
-
-    if(listaProductos.length === 0) {
-      contenedor.innerHTML = <p class="sin-productos">No hay piezas disponibles en esta categoría por ahora.</p>;
-      return;
-    }
-    
-    listaProductos.forEach(joya => {
-      const tarjeta = document.createElement('div');
-      tarjeta.className = 'tarjeta-joya';
-      
-      tarjeta.innerHTML = `
-        <div class="imagen-wrapper">
-          <img src="${joya.imagen}" alt="${joya.nombre}" class="joya-foto">
-        </div>
-        <div class="joya-info">
-          <span class="joya-categoria">${joya.categoria} | ${joya.genero}</span>
-          <h3 class="joya-nombre">${joya.nombre}</h3>
-          <p class="joya-material">✨ ${joya.material}</p>
-          <p class="joya-descripcion">${joya.descripcion}</p>
-          <div class="joya-footer">
-            <span class="joya-precio">$${joya.precio.toFixed(2)}</span>
-            <button class="btn-ver" onclick="alert('¡Pronto podrás comprar el ${joya.nombre}!')">Ver Pieza</button>
-          </div>
-        </div>
-      `;
-      contenedor.appendChild(tarjeta);
-    });
-  }
-
-  // Función que filtra las joyas según el botón presionado
-  function filtrarCatalogo(generoSeleccionado, botonPresionado) {
-    // 1. Cambiar la clase activa visual en los botones
-    document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
-    botonPresionado.classList.add('activo');
-
-    // 2. Filtrar la lista de joyas
-    if (generoSeleccionado === 'todos') {
-      mostrarProductos(todasLasJoyas);
-    } else {
-      const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
-      mostrarProductos(joyasFiltradas);
-    }
-  }
-
-  // Arrancar la app al cargar el documento
-  document.addEventListener('DOMContentLoaded', cargarCatalogo);
-</script>
+]  
