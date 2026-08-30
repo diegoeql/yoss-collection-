@@ -1,135 +1,337 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yoss Collection - Joyería</title>
-    <style>
-       /* Estilos elegantes para la barra de categorías */
-.filtros-genero {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 20px 0 35px 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoss Collection | Joyería Fina</title>
+  
+  <style>
+    /* 1. IMPORTACIÓN DE FUENTES ELEGANTES DE GOOGLE */
+    @import url('https://googleapis.com');
 
-.btn-filtro {
-  background-color: #ffffff;
-  color: #333333;
-  border: 1px solid #dddddd;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #faf9f6; /* Blanco hueso de alta gama */
+      color: #1a1a1a;
+    }
 
-.btn-filtro:hover {
-  background-color: #f5f5f5;
-}
+    /* Barra de anuncio superior */
+    .barra-anuncio {
+      background-color: #111111;
+      color: #ffffff;
+      text-align: center;
+      padding: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: 300;
+    }
 
-/* Cuando el botón esté seleccionado, toma un tono dorado elegante */
-.btn-filtro.activo {
-  background-color: #b89742; 
-  color: #ffffff;
-  border-color: #b89742;
-}
-    </style>
+    /* Cabecera y Logo */
+    .header-premium {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .logo-marca {
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 6px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    /* Menú de Navegación (Filtros de Género) */
+    .nav-categorias {
+      display: flex;
+      gap: 25px;
+    }
+
+    .btn-nav {
+      background: none;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: #666666;
+      cursor: pointer;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+      font-weight: 400;
+    }
+
+    .btn-nav:hover, .btn-nav.activo {
+      color: #111111;
+      border-bottom: 2px solid #111111;
+    }
+
+    /* Banner Principal (Estilo Baliq) */
+    .banner-hero {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.92), rgba(255,255,255,0.3)), url('https://unsplash.com');
+      background-size: cover;
+      background-position: center;
+      padding: 100px 8%;
+      display: flex;
+      align-items: center;
+      min-height: 250px;
+    }
+
+    .manuscrito {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: #886c42; /* Dorado quemado suave */
+      display: block;
+    }
+
+    .titulo-banner {
+      font-size: 3rem;
+      font-weight: 300;
+      margin: 5px 0 15px 0;
+      letter-spacing: 2px;
+    }
+
+    .banner-desc {
+      max-width: 450px;
+      font-size: 0.95rem;
+      color: #555555;
+      line-height: 1.6;
+    }
+
+    /* Contenedor del Catálogo */
+    .contenedor-catalogo {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .seccion-intro {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .seccion-intro h2 {
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .seccion-intro p {
+      font-size: 0.9rem;
+      color: #777777;
+      margin: 0;
+    }
+
+    /* Grid de Productos */
+    .grid-premium {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    /* Tarjeta de Joyería */
+    .card-premium {
+      background: #ffffff;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #eaeaea;
+    }
+
+    .img-container {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      background-color: #f7f7f7;
+    }
+
+    .img-joya {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card-premium:hover .img-joya {
+      transform: scale(1.05);
+    }
+
+    .info-premium {
+      padding: 20px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .material-premium {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #886c42;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .nombre-premium {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin: 0 0 8px 0;
+      color: #222222;
+    }
+
+    .desc-premium {
+      font-size: 0.85rem;
+      color: #666666;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .precio-premium {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #111111;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    /* Botón Elegante de Compra */
+    .btn-whatsapp {
+      background: #111111;
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .btn-whatsapp:hover {
+      background: #886c42;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>YOSS COLLECTION</h1>
-        <p>Catálogo Digital de Joyería</p>
-    </header>
-
-    <main>
-  <p class="subtitulo">Elige tus Joyas Favoritas y envíanos tu pedido directo por WhatsApp.</p>
-  
-  <!-- BOTONES DE FILTRO (Varones, Mujeres, Niños) -->
-  <div class="filtros-genero">
-    <button class="btn-filtro activo" onclick="filtrarCatalogo('todos', this)">Todos</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('varones', this)">Varones</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('mujeres', this)">Mujeres</button>
-    <button class="btn-filtro" onclick="filtrarCatalogo('niños', this)">Niños</button>
+  <!-- Barra de Anuncio Superior -->
+  <div class="barra-anuncio">
+    COMPRA SIN INTERESES • ENVIAMOS TU PEDIDO DIRECTO POR WHATSAPP
   </div>
 
-  <!-- Contenedor vacío donde JavaScript pintará tus joyas dinámicamente -->
-  <div id="contenedor-joyas" class="grid"></div>
-</main>
+  <!-- Cabecera -->
+  <header class="header-premium">
+    <div class="logo-marca">YOSS COLLECTION</div>
+    
+    <!-- Menú Dinámico Superior (Filtros) -->
+    <nav class="nav-categorias">
+      <button class="btn-nav activo" onclick="filtrarCatalogo('todos', this)">TODOS</button>
+      <button class="btn-nav" onclick="filtrarCatalogo('varones', this)">HOMBRE</button>
+      <button class="btn-nav" onclick="filtrarCatalogo('mujeres', this)">MUJER</button>
+      <button class="btn-nav" onclick="filtrarCatalogo('niños', this)">INFANTIL</button>
+    </nav>
+  </header>
 
-    <script>
-  // 1. CONFIGURACIÓN: Tu número de WhatsApp real (Mantenemos tu lógica)
-  const MI_CELULAR = "51964525825"; 
+  <!-- Banner de Tendencias (Estilo Baliq) -->
+  <section class="banner-hero">
+    <div class="banner-contenido">
+      <span class="manuscrito">Tendencias en Joyería: lo nuevo</span>
+      <h1 class="titulo-banner">Yoss Collection</h1>
+      <p class="banner-desc">Descubre nuestros últimos diseños y tendencias en joyería que tenemos para ti. Serás la atención principal llevando nuestras joyas este año. Es hora de deslumbrar.</p>
+    </div>
+  </section>
 
-  // Variable para almacenar el catálogo completo en memoria
-  let todasLasJoyas = [];
+  <!-- Contenido de la Tienda -->
+  <main class="contenedor-catalogo">
+    <div class="seccion-intro">
+      <h2>NUESTROS ÚLTIMOS MODELOS DE JOYAS</h2>
+      <p>Elige el tipo de joya que deseas comprar para obtener el look perfecto.</p>
+    </div>
 
-  // Función para jalar los datos desde tu almacén joyas.json
-  async function cargarCatalogo() {
-    try {
-      const respuesta = await fetch('joyas.json');
-      todasLasJoyas = await respuesta.json();
-      
-      // Al iniciar el local, muestra todas las piezas
-      mostrarProductos(todasLasJoyas);
-    } catch (error) {
-      console.error('Error al cargar el archivo de inventario:', error);
+    <!-- Espacio Dinámico para las Joyas -->
+    <div id="contenedor-joyas" class="grid-premium"></div>
+  </main>
+
+  <!-- LÓGICA JAVASCRIPT DEL NEGOCIO -->
+  <script>
+    const MI_CELULAR = "51964525825"; 
+    let todasLasJoyas = [];
+
+    // Cargar inventario automáticamente desde joyas.json
+    async function cargarCatalogo() {
+      try {
+        const respuesta = await fetch('joyas.json');
+        todasLasJoyas = await respuesta.json();
+        mostrarProductos(todasLasJoyas);
+      } catch (error) {
+        console.error('Error al conectar con joyas.json:', error);
+      }
     }
-  }
 
-  // Función encargada de estructurar y pintar las tarjetas usando tus estilos CSS anteriores
-  function mostrarProductos(listaProductos) {
-    const contenedor = document.getElementById('contenedor-joyas');
-    contenedor.innerHTML = ''; // Limpia las vitrinas antes de rellenar
+    // Dibujar tarjetas con estilo premium
+    function mostrarProductos(listaProductos) {
+      const contenedor = document.getElementById('contenedor-joyas');
+      if (!contenedor) return;
+      contenedor.innerHTML = '';
 
-    if (listaProductos.length === 0) {
-      contenedor.innerHTML = <p style="grid-column: 1/-1; text-align: center; color: #777;">No hay joyas disponibles en esta categoría por ahora.</p>;
-      return;
-    }
+      if (listaProductos.length === 0) {
+        contenedor.innerHTML = <p style="grid-column:1/-1; text-align:center; color:#999; font-size:0.9rem; font-family:sans-serif; padding:40px 0;">Próximamente añadiremos más piezas exclusivas a esta colección.</p>;
+        return;
+      }
 
-    listaProductos.forEach(joya => {
-      const tarjeta = document.createElement('div');
-      tarjeta.className = 'card';
+      listaProductos.forEach(joya => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'card-premium';
 
-      // Estructuramos la tarjeta respetando al 100% tus clases CSS visuales
-      tarjeta.innerHTML = `
-        <div class="card-body">
-          <span class="material">${joya.material} | ${joya.categoria}</span>
-          <h3 class="nombre">${joya.nombre}</h3>
-          <p class="desc">${joya.descripcion}</p>
-          <div class="footer-card">
-            <span class="precio">S/ ${joya.precio.toFixed(2)}</span>
-            <button onclick="pedir('${joya.nombre}', '${joya.precio}')" class="btn">Pedir por WhatsApp</button>
+        tarjeta.innerHTML = `
+          <div class="img-container">
+            <img src="${joya.imagen}" alt="${joya.nombre}" class="img-joya">
           </div>
-        </div>
-      `;
-      contenedor.appendChild(tarjeta);
-    });
-  }
-
-  // Función para segmentar el catálogo al hacer clic en los botones
-  function filtrarCatalogo(generoSeleccionado, botonPresionado) {
-    // Quita la marca dorada de los otros botones y se la pone al seleccionado
-    document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
-    botonPresionado.classList.add('activo');
-
-    if (generoSeleccionado === 'todos') {
-      mostrarProductos(todasLasJoyas);
-    } else {
-      const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
-      mostrarProductos(joyasFiltradas);
+          <div class="info-premium">
+            <span class="material-premium">${joya.material}</span>
+            <h3 class="nombre-premium">${joya.nombre}</h3>
+            <p class="desc-premium">${joya.descripcion}</p>
+            <span class="precio-premium">S/ ${joya.precio.toFixed(2)}</span>
+            <button onclick="pedir('${joya.nombre}', '${joya.precio}')" class="btn-whatsapp">Pedir por WhatsApp</button>
+          </div>
+        `;
+        contenedor.appendChild(tarjeta);
+      });
     }
-  }
 
-  // 2. FUNCIÓN DE WHATSAPP (Mantenemos intacta tu fantástica lógica original)
-  function pedir(nombre, precio) {
-    let texto = encodeURIComponent("¡Hola Yoss Collection! Me interesa adquirir esta pieza: \n\n* " + nombre + "\n* Precio: S/ " + precio + "\n\n¿Tienen disponibilidad?");
-    window.location.href = "https://wa.me" + MI_CELULAR + "?text=" + texto;
-  }
+    // Controlar filtros del menú superior
+    function filtrarCatalogo(generoSeleccionado, botonPresionado) {
+      document.querySelectorAll('.btn-nav').forEach(btn => btn.classList.remove('activo'));
+      if (botonPresionado) botonPresionado.classList.add('activo');
 
-  // Ejecuta la carga automática al abrir la tienda web
-  document.addEventListener('DOMContentLoaded', cargarCatalogo);
-</script>
+      if (generoSeleccionado === 'todos') {
+        mostrarProductos(todasLasJoyas);
+      } else {
+        const joyasFiltradas = todasLasJoyas.filter(joya => joya.genero === generoSeleccionado);
+        mostrarProductos(joyasFiltradas);
+      }
+    }
+
+    // Redirección profesional a WhatsApp
+    function pedir(nombre, precio) {
+      let texto = encodeURIComponent("¡Hola Yoss Collection! Me interesa adquirir esta hermosa pieza de joyería:\n\n✨ Producto: " + nombre + "\n💰 Precio: S/ " + precio + "\n\n¿Me podrían confirmar si tienen disponibilidad para entrega?");
+      window.location.href = "https://wa.me" + MI_CELULAR + "?text=" + texto;
+    }
+
+    // Inicializar tienda
+    document.addEventListener('DOMContentLoaded', cargarCatalogo);
+  </script>
 </body>
 </html>
